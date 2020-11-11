@@ -14,6 +14,24 @@ const lTetromino = [
     [width,width*2,width*2+1,width*2+2]
 ]
 
+const zTetromino = [
+    [1,width+1,width*2+1,2],
+    [width,width+1,width+2,width*2+2],
+    [1,width+1,width*2+1,width*2],
+    [width,width*2,width*2+1,width*2+2]
+]
 
+// Dodać prawdziw zTetromino
+
+let currentPosition=4
+const theTetrominos = [lTetromino,zTetromino]
+let current = theTetrominos[0][1]
+
+function draw() {
+    current.forEach(index => {
+        squares[currentPosition + index].classList.add("tetromino")
+    })
+}
+draw()
 
 });
