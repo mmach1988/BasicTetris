@@ -21,10 +21,29 @@ const zTetromino = [
     [0,width,width+1,width*2+1]
 ]
 
-// Dodać prawdziw zTetromino
+const tTetromino = [
+    [1, width, width + 1, width + 2],
+    [1, width + 1, width + 2, width * 2 + 1],
+    [width, width + 1, width + 2, width * 2 + 1],
+    [1, width, width + 1, width * 2 + 1]
+  ]
+
+const oTetromino = [
+    [0, 1, width, width + 1],
+    [0, 1, width, width + 1],
+    [0, 1, width, width + 1],
+    [0, 1, width, width + 1]
+  ]
+
+const iTetromino = [
+    [1, width + 1, width * 2 + 1, width * 3 + 1],
+    [width, width + 1, width + 2, width + 3],
+    [1, width + 1, width * 2 + 1, width * 3 + 1],
+    [width, width + 1, width + 2, width + 3]
+  ]
 
 let currentPosition=4
-const theTetrominos = [lTetromino,zTetromino]
+const theTetrominos = [lTetromino,zTetromino,tTetromino,oTetromino,iTetromino]
 let current = theTetrominos[0][1]
 
 function draw() {
@@ -34,4 +53,12 @@ function draw() {
 }
 draw()
 
+    let imiona = ["Maciek","Tomek","Kuba","Ania"]
+    // for (imie of imiona){
+    //     console.log("Hello "+imie)
+    // }
+
+    imiona.forEach(imie => {
+        console.log("Hello "+imie)
+    })
 });
