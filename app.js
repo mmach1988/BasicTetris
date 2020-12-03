@@ -40,25 +40,38 @@ const iTetromino = [
     [width,width+1,width+2,width+3],
     [1,width+1,width*2+1,width*3+1],
     [width,width+1,width+2,width+3]
-  ]
+]
 
-let currentPosition=4
 const theTetrominos = [lTetromino,zTetromino,tTetromino,oTetromino,iTetromino]
-let current = theTetrominos[0][1]
+let currentPosition=4
+let random=Math.floor(Math.random()*theTetrominos.length)
+let current = theTetrominos[random][0]
 
 function draw() {
     current.forEach(index => {
         squares[currentPosition + index].classList.add("tetromino")
     })
 }
-draw()
 
-    let imiona = ["Maciek","Tomek","Kuba","Ania"]
-    // for (imie of imiona){
-    //     console.log("Hello "+imie)
-    // }
-
-    imiona.forEach(imie => {
-        console.log("Hello "+imie)
+function undraw() {
+    current.forEach(index => {
+        squares[currentPosition + index].classList.remove("tetromino")
     })
+}
+
+function moveDown() {
+    undraw()
+    currentPosition+=width
+    draw()
+    freeze()
+}
+
+setInterval(moveDown, 500)
+
+function freeze() {
+    if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
+        current.forEach(index => squares[currentPosition + index].classList.add('taken'))
+        //start new tetromino
+}
+
 });
