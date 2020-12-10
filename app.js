@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const ScoreDisplay = document.querySelector('#score')
     const StartBtn = document.querySelector('#start-button')
     const width = 10
+    let timerId
+    let nextRandom = 0
     // console.log(squares)
 
 const lTetromino = [
@@ -42,10 +44,11 @@ const iTetromino = [
     [width,width+1,width+2,width+3]
 ]
 
-const theTetrominos = [lTetromino,zTetromino,tTetromino,oTetromino,iTetromino]
+const theTetrominoes = [lTetromino,zTetromino,tTetromino,oTetromino,iTetromino]
 let currentPosition=4
-let random=Math.floor(Math.random()*theTetrominos.length)
-let current = theTetrominos[random][0]
+let currentRotation = 0
+let random=Math.floor(Math.random()*theTetrominoes.length)
+let current = theTetrominoes[random][currentRotation]
 
 function draw() {
     current.forEach(index => {
@@ -62,16 +65,28 @@ function undraw() {
 function moveDown() {
     undraw()
     currentPosition+=width
+    currentRotation++
+    current = theTetrominoes[random][currentRotation]
     draw()
     freeze()
 }
 
-setInterval(moveDown, 500)
+setInterval(moveDown, 200)
+
+// document.addEventListener('keyup', control)
+// function control(e) {
+// }
 
 function freeze() {
     if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
         current.forEach(index => squares[currentPosition + index].classList.add('taken'))
         //start new tetromino
+        random = nextRandom
+        nextRandom = Math.floor(Math.random() * theTetrominoes.length)
+        current = theTetrominoes[random][0]
+        currentPosition =4
+        draw()
+}
 }
 
 });
