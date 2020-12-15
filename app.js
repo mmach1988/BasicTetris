@@ -65,17 +65,25 @@ function undraw() {
 function moveDown() {
     undraw()
     currentPosition+=width
-    currentRotation++
-    current = theTetrominoes[random][currentRotation]
     draw()
     freeze()
 }
 
+function moveLeft() {
+    undraw()
+    const isAtLeftEdge = current.some(index => (currentPosition + index)%width===0)
+    if(!isAtLeftEdge) currentPosition -=1
+    draw()
+}
+
 setInterval(moveDown, 200)
 
-// document.addEventListener('keyup', control)
-// function control(e) {
-// }
+document.addEventListener('keyup', control)
+function control(e) {
+    if(e.keyCode===37)
+    console.log("strzałka w lewo")
+    moveLeft()
+}
 
 function freeze() {
     if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
