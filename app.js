@@ -49,6 +49,7 @@ let currentPosition=4
 let currentRotation = 0
 let random=Math.floor(Math.random()*theTetrominoes.length)
 let current = theTetrominoes[random][currentRotation]
+let obrot = true
 
 function draw() {
     current.forEach(index => {
@@ -69,20 +70,64 @@ function moveDown() {
     freeze()
 }
 
+function moveRight() { 
+    undraw()
+    const isAtRightEdge = current.some(index => (currentPosition + index)%width===9)
+    if(!isAtRightEdge) currentPosition +=1
+    draw()
+    console.log('W prawo') 
+}
+
 function moveLeft() {
     undraw()
     const isAtLeftEdge = current.some(index => (currentPosition + index)%width===0)
     if(!isAtLeftEdge) currentPosition -=1
+    if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+        currentPosition++
+    }
     draw()
 }
 
-setInterval(moveDown, 200)
+function rotate() {
+    undraw()
+    currentRotation++
+    if(currentRotation === current.length) {
+        currentRotation = 0
+    }
+    current = theTetrominoes[random][currentRotation]
+    draw()
+}
+
+// function checkRotatedPosition() {
+//     obrot = true
+//     if(currentRotation===2) {
+//         obrot=false
+//     }
+//     if(!obrot) {
+//         if(currentRotation===0) {
+//             currentRotation=3
+//         }
+//         else {
+//             currentRotation--
+//         }
+//     }
+// }
+
+setInterval(moveDown, 2000)
 
 document.addEventListener('keyup', control)
 function control(e) {
-    if(e.keyCode===37)
-    console.log("strzałka w lewo")
-    moveLeft()
+    if(e.keyCode===37){
+        moveLeft()
+    }    
+
+    if(e.keyCode===38){
+        rotate()
+    }   
+
+    if(e.keyCode===39){
+        moveRight()
+    }   
 }
 
 function freeze() {
