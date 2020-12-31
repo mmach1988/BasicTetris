@@ -10,15 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // console.log(squares)
 
    //tetriminoes
-   const lTetromino = [
-    [1,width+1,width*2+1,2],
-    [width,width+1,width+2,width*2+2],
-    [1,width+1,width*2+1,width*2],
-    [width,width*2,width*2+1,width*2+2]
-  ]
+const lTetromino = [
+  [1,width+1,width*2+1,2],
+  [width,width+1,width+2,width*2+2],
+  [1,width+1,width*2+1,width*2],
+  [width,width*2,width*2+1,width*2+2]
+]
 
 const zTetromino = [
-  [0,width,width+1, width*2+1],
+  [0,width,width+1,width*2+1],
   [width+1,width+2,width*2,width*2+1],
   [0,width,width+1,width*2+1],
   [width+1,width+2,width*2,width*2+1]
@@ -142,5 +142,16 @@ function freeze() {
         draw()
 }
 }
+
+const displaySquares = document.querySelectorAll('.mini-grid div')
+const displayWidth = 4
+let displayIndex = 0
+const upNextTetrominoes =  [
+    [1,displayWidth+1,displayWidth*2+1,2],
+    [0,displayWidth,displayWidth+1,displayWidth*2+1],
+    [1,displayWidth,displayWidth+1,displayWidth+2],
+    [0,1,displayWidth,displayWidth+1],
+    [1,displayWidth+1,displayWidth*2+1,displayWidth*3+1]
+]
 
 });
