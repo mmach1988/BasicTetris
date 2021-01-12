@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     // console.log('DOM fully loaded and parsed');
     const grid = document.querySelector('.grid')
     let squares = Array.from(document.querySelectorAll('.grid div'))
     const ScoreDisplay = document.querySelector('#score')
-    const StartBtn = document.querySelector('#start-button')
+    const startBtn = document.querySelector('#start-button')
     const width = 10
     let timerId
     let nextRandom = 0
@@ -99,6 +100,7 @@ function rotate() {
     draw()
 }
 
+
 // function checkRotatedPosition() {
 //     obrot = true
 //     if(currentRotation===2) {
@@ -114,7 +116,8 @@ function rotate() {
 //     }
 // }
 
-setInterval(moveDown, 2000)
+// setInterval(moveDown, 250)
+clearInterval
 
 document.addEventListener('keyup', control)
 function control(e) {
@@ -140,6 +143,7 @@ function freeze() {
         current = theTetrominoes[random][0]
         currentPosition =4
         draw()
+        displayShape()
 }
 }
 
@@ -153,5 +157,31 @@ const upNextTetrominoes =  [
     [0,1,displayWidth,displayWidth+1],
     [1,displayWidth+1,displayWidth*2+1,displayWidth*3+1]
 ]
+
+function displayShape() {
+    console.log('displayshape')
+    displaySquares.forEach(square => {
+    square.classList.remove('tetromino')
+    })
+
+    upNextTetrominoes[nextRandom].forEach(index => {
+        displaySquares[index].classList.add('tetromino')
+    })
+}
+
+startBtn.addEventListener('click', () => {
+    if (timerId) {
+        clearInterval(timerId)
+        timerId = null
+      } else {
+        draw()
+        timerId = setInterval(moveDown, 750)
+        nextRandom = Math.floor(Math.random()*theTetrominoes.length)
+        displayShape()
+      }
+  })
+
+
+
 
 });
