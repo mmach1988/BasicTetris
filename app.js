@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const width = 10
     let timerId
     let nextRandom = 0
+    let firstTime = true
     // console.log(squares)
 
    //tetriminoes
@@ -169,6 +170,7 @@ function displayShape() {
     })
 }
 
+
 startBtn.addEventListener('click', () => {
     if (timerId) {
         clearInterval(timerId)
@@ -176,10 +178,22 @@ startBtn.addEventListener('click', () => {
       } else {
         draw()
         timerId = setInterval(moveDown, 750)
+        if(firstTime){
         nextRandom = Math.floor(Math.random()*theTetrominoes.length)
+        firstTime = false
+        }
+       
         displayShape()
       }
   })
+
+// Pętla for
+//Wyświetl  w konsoli (15 razy) text: 'To jest nr: ' numer
+// numer od 1-15
+
+for (let i=1; i<16; i++) {
+    console.log("To jest nr: " + i);
+}
 
 
 
