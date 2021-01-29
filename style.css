@@ -10,6 +10,7 @@
 .grid div{
     width: 20px;
     height: 20px;
+ 
 }
 
 .tetromino{
@@ -39,4 +40,9 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.red {
+    background-color: red;   
+}
+
 

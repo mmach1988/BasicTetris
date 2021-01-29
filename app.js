@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ScoreDisplay = document.querySelector('#score')
     const startBtn = document.querySelector('#start-button')
     const width = 10
+    let score = 0;
     let timerId
     let nextRandom = 0
     let firstTime = true
@@ -145,6 +146,7 @@ function freeze() {
         currentPosition =4
         draw()
         displayShape()
+        addScore()
 }
 }
 
@@ -177,7 +179,7 @@ startBtn.addEventListener('click', () => {
         timerId = null
       } else {
         draw()
-        timerId = setInterval(moveDown, 750)
+        timerId = setInterval(moveDown, 400)
         if(firstTime){
         nextRandom = Math.floor(Math.random()*theTetrominoes.length)
         firstTime = false
@@ -187,13 +189,32 @@ startBtn.addEventListener('click', () => {
       }
   })
 
-// Pętla for
-//Wyświetl  w konsoli (15 razy) text: 'To jest nr: ' numer
-// numer od 1-15
+ 
 
-for (let i=1; i<16; i++) {
-    console.log("To jest nr: " + i);
+
+  
+  
+
+function addScore() {
+    for (let i = 0; i <199; i+=width) {
+    const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9]
+
+    if(row.every(index => squares[index].classList.contains('taken'))) {
+score+=10
+ScoreDisplay.innerHTML = score
+row.forEach(index => {
+    squares[index].classList.remove('taken')
+    squares[index].classList.remove('tetromino')
+
+})
+const squaresRemoved = squares.splice(i, width)
+squares = squaresRemoved.concat(squares)
+squares.forEach(cell => grid.appendChild(cell))
+    }
+    }
 }
+
+
 
 
 
